@@ -1,0 +1,18 @@
+Technologies Used:
+•	R Programming: For data processing, statistical analysis, and visualization.
+•	ggplot2: For creating visualizations like bar plots, histograms, and box plots.
+
+Methodology:
+1.	Data Collection: Create a dataset with employee names and their scores in Sales, Customer Service, and Project Completion.
+2.	Statistical Analysis: Calculate mean, median, and standard deviation for each category.
+3.	Identify Performers: Use which.max() and which.min() to identify the highest and lowest performers.
+4.	Visualization:
+o	Bar Plot: Displays the average score per category.
+o	Histograms: Show the distribution of scores.
+o	Box Plots: Visualize score spread and identify outliers.
+
+Implementation:
+1.	Dataset: A data frame containing employee names and performance scores.
+2.	Statistics: Compute mean, median, and standard deviation for each category.
+3.	Visualization: Use ggplot2 to generate bar plots, histograms, and box plots.
+
