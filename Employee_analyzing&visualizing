@@ -1,0 +1,88 @@
+# Load required libraries
+library(ggplot2)
+
+# Sample data: Employee names and their performance scores in three areas (Sales, Customer Service, Project Completion)
+employee_data <- data.frame(
+  Employee = c("John", "Alice", "Bob", "David", "Eva", "Frank", "Grace", "Helen", "Ivy", "Jack"),
+  Sales_Performance = c(85, 92, 78, 88, 95, 72, 60, 85, 91, 82),
+  Customer_Service = c(88, 78, 92, 85, 90, 74, 80, 87, 95, 89),
+  Project_Completion = c(92, 85, 78, 90, 88, 70, 75, 92, 85, 83)
+)
+
+# Display the dataset
+print("Employee Performance Data:")
+print(employee_data)
+
+# Summary statistics for each category
+summary_stats <- data.frame(
+  Category = c("Sales Performance", "Customer Service", "Project Completion"),
+  Mean = c(mean(employee_data$Sales_Performance),mean(employee_data$Customer_Service), mean(employee_data$Project_Completion)),
+  Median = c(median(employee_data$Sales_Performance), median(employee_data$Customer_Service), median(employee_data$Project_Completion)),
+  Std_Dev = c(sd(employee_data$Sales_Performance), sd(employee_data$Customer_Service), sd(employee_data$Project_Completion))
+)
+
+# Print summary statistics
+print("Summary Statistics for Each Category:")
+print(summary_stats)
+
+# Highest and lowest performers for each category
+highest_performers <- data.frame(
+  Category = c("Sales Performance", "Customer Service", "Project Completion"),
+  Highest_Performer = c(employee_data$Employee[which.max(employee_data$Sales_Performance)],
+                        employee_data$Employee[which.max(employee_data$Customer_Service)],
+                        employee_data$Employee[which.max(employee_data$Project_Completion)]),
+  Highest_Score = c(max(employee_data$Sales_Performance), max(employee_data$Customer_Service), max(employee_data$Project_Completion))
+)
+
+lowest_performers <- data.frame(
+  Category = c("Sales Performance", "Customer Service", "Project Completion"),
+  Lowest_Performer = c(employee_data$Employee[which.min(employee_data$Sales_Performance)],
+                       employee_data$Employee[which.min(employee_data$Customer_Service)],
+                       employee_data$Employee[which.min(employee_data$Project_Completion)]),
+  Lowest_Score = c(min(employee_data$Sales_Performance), min(employee_data$Customer_Service), min(employee_data$Project_Completion))
+)
+
+# Print highest and lowest performers
+print("Highest Performers in Each Category:")
+print(highest_performers)
+
+print("Lowest Performers in Each Category:")
+print(lowest_performers)
+
+# Visualization: Bar plots for average performance in each category
+avg_performance <- data.frame(
+  Category = c("Sales Performance", "Customer Service", "Project Completion"),
+  Average_Score = c(mean(employee_data$Sales_Performance), mean(employee_data$Customer_Service),
+                    mean(employee_data$Project_Completion))
+)
+
+# Plotting bar chart
+ggplot(avg_performance, aes(x = Category, y = Average_Score, fill = Category)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Average Performance in Each Category", x = "Category", y = "Average Performance Score") +
+  theme_minimal()
+
+# Visualization: Histogram for performance distribution of each category
+par(mfrow = c(1, 3)) # Layout: 1 row, 3 columns for side-by-side plots
+hist(employee_data$Sales_Performance, main = "Sales Performance Distribution",
+     xlab = "Performance Score", col = "skyblue", border = "black")
+hist(employee_data$Customer_Service, main = "Customer Service Distribution",
+     xlab = "Performance Score", col = "lightgreen", border = "black")
+hist(employee_data$Project_Completion, main = "Project Completion Distribution", 
+     xlab = "Performance Score", col = "salmon", border = "black")
+
+# Box plots for performance distribution
+ggplot(employee_data, aes(x = "Sales Performance", y = Sales_Performance)) +
+  geom_boxplot(fill = "skyblue") +
+  labs(title = "Sales Performance Box Plot", x = "Category", y = "Performance Score") 
+
+ggplot(employee_data, aes(x = "Customer Service", y = Customer_Service)) +
+  geom_boxplot(fill = "lightgreen") +
+  labs(title = "Customer Service Box Plot", x = "Category", y = "Performance Score") 
+  
+
+ggplot(employee_data, aes(x = "Project Completion", y = Project_Completion)) +
+  geom_boxplot(fill = "salmon") +
+  labs(title = "Project Completion Box Plot", x = "Category", y = "Performance Score")
+
+
